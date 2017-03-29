@@ -8,9 +8,16 @@ function rot13(string) {
       outputStr += String.fromCharCode(asciiNum + 13);
     } else if ((asciiNum >= 78 && asciiNum <= 90) || (asciiNum >= 110 && asciiNum <= 122)){
         outputStr += String.fromCharCode(asciiNum - 13);
-    } else 
+    } else {
         outputStr += string[i];
     }
+  }
 
   return outputStr;
 }
+
+
+console.log(rot13('Teachers open the door, but you must enter by yourself.'));
+
+// logs:
+// Grnpuref bcra gur qbbe, ohg lbh zhfg ragre ol lbhefrys.
