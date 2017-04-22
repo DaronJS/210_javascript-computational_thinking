@@ -508,6 +508,78 @@ Functions expressions involve assigning a function to a declared variable; since
 2. Always declare functions before calling them.
 
 
+# Javascript Errors
+## Reference Error
+  - a `ReferenceError` occurs when you reference a variable or function that doesnt exist;
+```
+a;           // Referencing a variable that doesn't exist results in a ReferenceError
+a();         // The same is true of attempting to call a function that doesn't exist.
+```
+
+## Type Error 
+  - a  `TypeError` usually occurs when you try access the property on a value that does not contain properties such as `null`;
+  - trying to call something that isnt a function can also result in `TypeError`;
+```
+var a;       // a is declared but is empty as it has not been set to a value.
+typeof(a);   // 'undefined'
+
+a.name;      // TypeError: Cannot read property 'name' of undefined
+
+a = 1;
+a();         // TypeError: Property 'a' is not a function
+```
 
 
+## Syntax Error 
+- `SyntaxError` will usually be thrown right when the program loads and before it begins to run, it is different than `ReferenceError` and `TypeError` in that it isnt dependant on variables and values at runtime, instead it recognizes the error solely from the text of your program;
 
+## How to avoid Errors
+
+### Use Guard Clauses
+- simply by using a conditional statement we can ensure that the input meets certain criteria before running.
+
+#### When to use Guard Clauses
+- Guard Clauses are best to be used when you cannot trust that a functions arguments will be valid. Invalid arguments can have incorrect
+types, structures, values, or properties. Usually your program should be able to trust itself to do the right thing; you should be able to trust that it always calls its methods with valid values. 
+
+### Detecting Edge Cases 
+- Most error prevention work stems from examining the assumptions inherent in your code.
+  1. Find the where your program *could* violate your assumptions. These are called **Edge Cases**
+    - These are called *Edge Cases* because they usually involve values at the extreme end of a possible range of values.
+    - consider your code's input (functions take arguments, each data type has its own set of values that can cause undesired behavior)
+  * example:
+   If you code expects a number input, what happens if that number is negative? or zero? or a decimal value?
+   If your code expects a string, what if the string contains only whitespace characters or special characters?
+
+### Planning Your Code 
+- It is impossible to think of every scenerio but you can plan ahead. When writing a new function write out some common use cases and see how your function handles them.
+```var countries = ['Australia', 'Cuba', 'Senegal'];
+
+alphaInsert(countries, 'Brazil');
+
+console.log(countries.join(', '));         // Logs "Australia, Brazil, Cuba, Senegal"
+```
+now some edge cases
+```
+alphaInsert([], 'Brazil');                 // Inserting in an empty Array
+alphaInsert(['Brazil'], 'Australia');      // At the beginning of an Array
+alphaInsert(['Brazil'], 'Cuba');           // At the end of an Array
+alphaInsert(['Brazil'], 'Brazil');         // Duplicate entry
+```
+
+### Catching Errors 
+We can't always predict and stop errors from being thrown. Some built-in Javascript Functions can throw errors that it isnt possible to prevent but we can 'catch' the errors with a `try/catch/finally` block.
+- the syntax looks very similar to an `if/else` block.
+```
+try {
+  // Do something that might fail here and throw an Error.
+} catch (error) {
+  // This code only runs if something in the try clause throws an Error.
+  // "error" contains the Error object.
+} finally {
+  // This code always runs, no matter if the above code throws an Error or not.
+}
+```
+### **Only use `try/catch/finally` blocks when the following conditions are both true;
+  1. a built-in Javascript Function or method can throw an Error and you need to handle or prevent that Error;
+  2. a simple guard clause is impossible or impractical to prevent that error. 
