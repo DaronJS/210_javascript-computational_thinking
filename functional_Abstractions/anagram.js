@@ -1,18 +1,15 @@
+// returns an array list of all words in the list argument that are an anagram of the word argument;
 function anagram(word, list) {
-  var sortedWord = sortChars(word);
-  return list.filter(function(el) {
-    return areAnagrams(el, sortedWord);
+  return list.filter(function(currentWord) {
+    return areAnagrams(currentWord, word);
   });
 }
 
 function areAnagrams(str1, str2) {
-  var doesMatch = true;
-  sortChars(str1).forEach(function (char, index) { 
-      if (char !== str2[index]) {
-        doesMatch = false;
-      }
+  str2 = sortChars(str2);
+  return sortChars(str1).every(function (char, index) { 
+      return char === str2[index];
   });
-  return doesMatch;
 }
 
 function sortChars(string) {
