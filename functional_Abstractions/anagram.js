@@ -6,13 +6,13 @@ function anagram(word, list) {
 }
 
 function areAnagrams(str1, str2) {
-  str2 = sortChars(str2);
-  return sortChars(str1).every(function (char, index) { 
-      return char === str2[index];
+  var str2Array = sortCharsToArray(str2);
+  return sortCharsToArray(str1).every(function (char, index) { 
+      return char === str2Array[index];
   });
 }
 
-function sortChars(string) {
+function sortCharsToArray(string) {
   return string.split('').sort();
 }
 
