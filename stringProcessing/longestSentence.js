@@ -8,7 +8,7 @@ function longestSentence(text) {
 }
 
 function findLongestSentence(text) {
-  return text.split(/[\.\?\!]/g).reduce(longerSentence);
+  return text.match(/\w.*?[\.\?\!]/g).reduce(longerSentence);
 }
 
 function longerSentence(sentence1, sentence2) {
@@ -16,7 +16,7 @@ function longerSentence(sentence1, sentence2) {
 }
 
 function countWords(sentence) {
-  return sentence.trim().split(' ').length;
+  return sentence.split(' ').length;
 }
 
 var longText = 'Four score and seven years ago our fathers brought forth' +
