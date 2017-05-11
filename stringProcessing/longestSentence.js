@@ -50,3 +50,4 @@ var longText = 'Four score and seven years ago our fathers brought forth' +
   ' earth.';
 
   longestSentence(longText);
+  longestSentence('hello');
