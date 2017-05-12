@@ -53,7 +53,7 @@ Strings also have a length property which can be accessed with:
 
 # Variables
 
-### General Guidlines in naming variables in Javascript
+### General Guidelines in naming variables in Javascript
 
 1. Javascript is case sensitive: `my_variable` is different than `my_Variable`
 2. Variable names can be any length
@@ -381,7 +381,7 @@ do {
 ```
 
 ## The 'for' loop 
-This is the most common looping structure in Javascript. It lets you combine three key elements of a loop: setting the initial state, evaluating a condition, and making some type of change before re-evaluation the condition. All three elements appear as a singel statement.
+This is the most common looping structure in Javascript. It lets you combine three key elements of a loop: setting the initial state, evaluating a condition, and making some type of change before re-evaluation the condition. All three elements appear as a single statement.
 
 syntax:
 ```
@@ -544,7 +544,7 @@ types, structures, values, or properties. Usually your program should be able to
 
 ### Detecting Edge Cases 
 - Most error prevention work stems from examining the assumptions inherent in your code.
-  1. Find the where your program *could* violate your assumptions. These are called **Edge Cases**
+  1. Find where your program *could* violate your assumptions. These are called **Edge Cases**
     - These are called *Edge Cases* because they usually involve values at the extreme end of a possible range of values.
     - consider your code's input (functions take arguments, each data type has its own set of values that can cause undesired behavior)
   * example:
