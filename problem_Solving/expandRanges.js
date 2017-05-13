@@ -33,18 +33,19 @@ console.log(parseAndExpandRanges('545,64:11')); // [545, 564 ... 611]
 // algorithm
 // - split input string on commas, save as an array of parts;
 // - iterate through array of parts:
-//   - if the part is a range(identify with regex) that needs to be expanded:
-//     - if the lower end number is less than the previous number in the array 
-//       then it is only the significant portion, count up from the previous value in the array until 
-//       a number contains matches the significant portion, this is the start of the range
-//     - count up from low end limit add each number to list of nums until you reach the
-//       first number that contains the significant portion.
-//     - return the full list created
-//   - else it is just a number
-//     - if the number is less than the previous number in the array
-//       start counting from the previous number until a number matches the current number as the significant portion
-//       add that number to the final output 
-//     - else the number is the value it should be, add it to the final output and move on to the next part of the parts array;
+//   - if the part is a number and not a range and is higher than the last value in the sequence
+     //    - convert the string number into a number and add the number to the output list;
+     // - else the number is a range or is only a significant portion of a number and must be converted or expanded or both
+     //    - process the range or significant portion to make all numbers valid in the given range
+     //      - step through the part string and make sure all numbers are the full proper number for the range
+     //        - if there are any digits that need to be expanded (the number is less than the already current highest val)
+     //          - replace it with the proper value;
+     //        - else leave it alone;
+     //    - once all numbers in the part string are valid range numbers
+     //      - step through the range creating a list of numbers that fill in the gaps between the limits of the range;
+     //    - concat the expanded list from the range in the part string to the output list of numbers, 
+     //    - move on to the next part
+
 // - return final output of nums;
 
 function parseAndExpandRanges(rangeString) {
@@ -66,7 +67,7 @@ function parseAndExpandRanges(rangeString) {
 }
 
 function expandRange(range, lastOfSequence) {
-  var limits = processLimits(range.match(/\d+/g), lastOfSequence);
+  var limits = processRangeLimits(range.match(/\d+/g), lastOfSequence);
   var rangeList = [];
   if (limits.length === 1) {
     return Number(limits[0]);
@@ -85,7 +86,7 @@ function expandRange(range, lastOfSequence) {
   }
 }
 
-function processLimits(strLimits, lastOfSequence) {
+function processRangeLimits(strLimits, lastOfSequence) {
   return strLimits.map(function (strNum) {
     var count = lastOfSequence;
     if (Number(strNum).toString(10) === strNum && Number(strNum) > lastOfSequence) {
