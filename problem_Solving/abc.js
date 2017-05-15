@@ -24,12 +24,12 @@ console.log(isBlockWord('Box')); // false;
 // array of strings containing each pair in an element
 
 // algorithm
-// - set available letters array of arrays;
+// - set available letters array of string blocks;
 // - normailize input (uppercase everything);
 // - transform into Array for iteration purposes
 // - step through the input
     // - check if the element is available for use
-    //   - if it is then remove it and its mate from the available list
+    //   - if it is then remove the block from the available list
     //       then continue to next element 
     //   - if its not available return false;
     // - return true (the iteration never returned false and finished the loop)
@@ -38,20 +38,15 @@ console.log(isBlockWord('Box')); // false;
 function isBlockWord(word) {
   var available = ['BO', 'XK', 'DQ', 'CP', 'NA', 'GT', 'RE', 'FS', 'JW', 'HU', 'VI', 'LY', 'ZM'];
   var chars = word.toUpperCase().split('');
-  var isValid = true;
-  chars.forEach(function (char){
+  for(var i = 0; i < chars.length; i += 1) {
     var blockRemoved = false;
     available.forEach(function (block, idx) {
-      if (RegExp(char).test(block)) {
+      if (RegExp(chars[i]).test(block)) {
         available.splice(idx, 1);
         blockRemoved = true;
       }
     });
-
-    if(!blockRemoved) {
-      isValid = false;
-    }
-
-  });
-  return isValid;
+    if(!blockRemoved) {return false};
+  }
+  return true;
 }
